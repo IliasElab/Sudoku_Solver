@@ -14,7 +14,8 @@ const Sudoku = () => {
 
     useEffect(() => {
         //Avoid the useEffect to load if it is the first Render of the component
-        if (!firstRender){
+        
+        if (!firstRender && data.length !== 0){
             function solving(board) {
                 let emptySpot = nextSlot(board);
                 let [row, col, isComplete] = emptySpot;
@@ -48,12 +49,16 @@ const Sudoku = () => {
     }, [data])
     
     useEffect(() => {
-        if (!firstRender){
-            console.log(solution);
+        if (!firstRender && solution.length !== 0){
+            function render_Solution() {
+                for (let i = 0; i < nb_of_input; i++) {
+                    const slot = document.getElementById(i);
+                    slot.value = solution[~~(i / 9)][i % 9];
+                }
+            };
+            render_Solution();
         }    
     }, [solution])
-
-    
 
     function nextSlot(board) {
         for (var i = 0; i < 9; i++) {
@@ -65,6 +70,11 @@ const Sudoku = () => {
         return [-1, -1, true];
     }
 
+    function resetAll() {
+        setData([]);
+        setSolution([]);
+    }
+
     function isValid(board){
         let rows = [new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set()]
         let cols = [new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set()]
@@ -72,18 +82,18 @@ const Sudoku = () => {
         
         for (let i = 0; i < 9; i++){
             for (let j = 0; j < 9; j++){
-                let number = board[i][j]
+                let number = board[i][j];
                 if (number !== 0){
                     if (rows[i].has(number) || cols[j].has(number) || squares[~~(i / 3) * 3 + ~~(j / 3)].has(number)){
-                        return false
+                        return false;
                     }        
-                    rows[i].add(number)
-                    cols[j].add(number)
-                    squares[~~(i / 3) * 3 + ~~(j / 3)].add(number)
+                    rows[i].add(number);
+                    cols[j].add(number);
+                    squares[~~(i / 3) * 3 + ~~(j / 3)].add(number);
                 }
             }
         }
-        return true
+        return true;
     }
 
     function isSafe(board, row, col, num){
@@ -115,6 +125,7 @@ const Sudoku = () => {
     function handleSubmit(e) {
         e.preventDefault();
         let filled_Sudoku = [[], [], [], [], [], [], [], [], []];
+        
         for (let i = 0; i < 9; i++) {
             for (let j = 0; j < 9; j++) {
                 let val = parseInt(e.target[i * 9 + j].value)
@@ -125,14 +136,15 @@ const Sudoku = () => {
                     filled_Sudoku[i].push(0);
                 }
             }
+            
         }
         setData(filled_Sudoku);  
     }
 
     const render_inputs = () => {
         let all_Inputs = [];
-        for (let i = 1; i <= nb_of_input; i++) {
-            all_Inputs.push(<input name={i} min='1' max='9' type='number' key={i}/>);
+        for (let i = 0; i < nb_of_input; i++) {
+            all_Inputs.push(<input className="sudokuSlot" id={i} min='1' max='9' type='number' key={i}/>);
         }
         return all_Inputs; 
     };
@@ -140,11 +152,17 @@ const Sudoku = () => {
     return (
         <div>
             <div id ="sudoku">
-                <h1>sudoku</h1>
-                <form onSubmit={handleSubmit}>
-                    {render_inputs()}
-                    <input type='submit' value='Solve'/>
+                <h1>Sudoku Solver</h1>
+                <form id='sudokuForm' onSubmit={handleSubmit}>
+                    <div id='inputs'>
+                        {render_inputs()}
+                    </div>
+                    <div id="formButtons">
+                        <input id='submitButton' type='submit' value='Solve'/> 
+                        <input type='reset' onClick={resetAll} value='Clear'/> 
+                    </div>
                 </form>
+                
             </div>
         </div>
     );
