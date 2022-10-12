@@ -1,0 +1,44 @@
+#sudoku {
+    text-align: center;
+    height: 100vh;
+}
+
+#sudoku #sudokuForm {
+    max-width: 480px;
+    margin: 0 auto 0;
+    #inputs{
+        display: grid;
+        margin-left: auto;
+        margin-right: auto;
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-rows: repeat(9, 1fr);
+        grid-gap: 3px;
+
+        .sudokuSlot {
+            -moz-appearance: textfield;
+            height: 50px;
+            width: 50px;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .sudokuSlot::-webkit-outer-spin-button, .sudokuSlot::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+
+    #formButtons {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
+
+        input {
+            height: 50px;
+            width: 120px;
+        }
+    }
+}
+
+
+
