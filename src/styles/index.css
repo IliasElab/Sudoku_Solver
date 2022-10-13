@@ -1,0 +1,64 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+#sudoku {
+  text-align: center;
+  height: 100vh;
+}
+
+#sudoku #sudokuForm {
+  max-width: 480px;
+  margin: 0 auto 0;
+}
+
+#sudoku #sudokuForm #inputs {
+  display: -ms-grid;
+  display: grid;
+  margin-left: auto;
+  margin-right: auto;
+  -ms-grid-columns: (1fr)[9];
+      grid-template-columns: repeat(9, 1fr);
+  -ms-grid-rows: (1fr)[9];
+      grid-template-rows: repeat(9, 1fr);
+  grid-gap: 3px;
+}
+
+#sudoku #sudokuForm #inputs .sudokuSlot {
+  -moz-appearance: textfield;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  font-size: 30px;
+}
+
+#sudoku #sudokuForm #inputs .sudokuSlot::-webkit-outer-spin-button, #sudoku #sudokuForm #inputs .sudokuSlot::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#sudoku #sudokuForm #formButtons {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+#sudoku #sudokuForm #formButtons input {
+  height: 50px;
+  width: 120px;
+}
+
+#root {
+  background-image: url("../../../public/AI.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+/*# sourceMappingURL=index.css.map */

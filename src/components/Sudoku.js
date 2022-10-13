@@ -152,7 +152,6 @@ const Sudoku = () => {
     return (
         <div>
             <div id ="sudoku">
-                <h1>Sudoku Solver</h1>
                 <form id='sudokuForm' onSubmit={handleSubmit}>
                     <div id='inputs'>
                         {render_inputs()}
