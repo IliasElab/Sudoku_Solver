@@ -54,11 +54,21 @@
   width: 120px;
 }
 
-#root {
-  background-image: url("../../../public/AI.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  background-attachment: fixed;
+#home {
+  /*background-image: url('../../../public/AI.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;*/
+}
+
+#home img {
+  z-index: -10;
+  position: absolute;
+  height: calc(100% + 150px);
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  top: -150px;
 }
 /*# sourceMappingURL=index.css.map */

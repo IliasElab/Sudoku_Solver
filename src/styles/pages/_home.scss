@@ -1,7 +1,46 @@
-#root {
-    background-image: url('../../../public/AI.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center ;
-    background-attachment: fixed;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,300&display=swap');
+
+$darkbg : #010B17;
+$dark : #052345;
+$normal : #07457D;
+$light: #0180BC;
+$verylight: #5EDFFC;
+$maxlight: #A5EEFF;
+
+
+#home {
+    font-family: 'Montserrat', sans-serif;
+
+    #intro {
+        height: 100vh;
+        background-image: linear-gradient(to bottom, rgba(2, 12, 24, 0,) 50%,rgba(2, 12, 24, 0.8) 100%);
+
+        img {
+            z-index: -10;
+            position: absolute;
+            height: calc(100% + 150px);
+            width:100%;
+            object-fit: cover;
+            top: -150px;  
+        }
+    
+        h1 {
+            padding-top: 100px;
+            padding-bottom: 50px;
+            color: $maxlight;
+            text-align: center;
+            font-size: 64px;
+        }
+
+        h3 {
+            span {
+                color: $maxlight;
+            }
+            font-size: 35px;
+            text-align: center;
+            max-width: 50%;
+            margin: 5% auto;
+            color: white;
+        }
+    }
 }
