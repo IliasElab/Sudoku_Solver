@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,300&display=swap');
 
-$darkbg : #010B17;
+//$darkbg : #010B17;
+$darkbg : rgb(4, 19, 35);
 $dark : #052345;
 $normal : #07457D;
 $light: #0180BC;
@@ -13,7 +14,7 @@ $maxlight: #A5EEFF;
 
     #intro {
         height: 100vh;
-        background-image: linear-gradient(to bottom, rgba(2, 12, 24, 0,) 50%,rgba(2, 12, 24, 0.8) 100%);
+        background-image: linear-gradient(to bottom, rgba(2, 12, 24, 0,) 50%,rgb(4, 19, 35) 100%);
 
         img {
             z-index: -10;
@@ -41,6 +42,62 @@ $maxlight: #A5EEFF;
             max-width: 50%;
             margin: 5% auto;
             color: white;
+        }
+    }
+
+    #main {
+        height: 100vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex: 20px;
+        background-color: $darkbg;
+
+        h3 {
+            text-align: center;
+            max-width: 30%;
+            color: white;
+        }
+    }
+
+    #about {
+        color : white;
+        background-color: $darkbg;
+        height: 50vh;
+
+        h4 {
+            text-align: center;
+            font-size: 30px;
+            span {
+                display:block;
+                color: $verylight
+            }
+        }
+        h5 {
+            text-align: center;
+            color: $maxlight;
+            font-size: 25px;
+            font-style: italic;
+        }
+
+        #list_contact {
+            display: flex;
+            max-width: 50%;
+            justify-content: space-around;
+            align-items: center;
+            margin: 5% auto;
+
+            .list_element {
+                list-style: none;
+                
+                a {
+                    text-decoration: none;
+                    color: white;
+                    i {
+                        color: $maxlight;
+                    }
+                }
+            }
         }
     }
 }
