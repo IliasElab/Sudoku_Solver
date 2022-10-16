@@ -47,18 +47,6 @@ const Sudoku = () => {
             }
         } 
     }, [data])
-    
-    useEffect(() => {
-        if (!firstRender && solution.length !== 0){
-            function render_Solution() {
-                for (let i = 0; i < nb_of_input; i++) {
-                    const slot = document.getElementById(i);
-                    slot.value = solution[~~(i / 9)][i % 9];
-                }
-            };
-            render_Solution();
-        }    
-    }, [solution])
 
     function nextSlot(board) {
         for (var i = 0; i < 9; i++) {
@@ -144,10 +132,35 @@ const Sudoku = () => {
     const render_inputs = () => {
         let all_Inputs = [];
         for (let i = 0; i < nb_of_input; i++) {
-            all_Inputs.push(<input className="sudokuSlot" id={i} min='1' max='9' type='number' key={i}/>);
+            const idxr = ~~(i / 9);
+            const idxe = i % 9;
+            if((~~(idxr / 3) !== 1 && ~~(idxe / 3) !== 1) || (~~(idxr / 3) === 1 && ~~(idxe / 3) === 1)){
+                all_Inputs.push(<input className="sudokuSlot inputs_side_color" id={i} min='1' max='9' type='number' key={i}/>);
+            }
+            else {
+                all_Inputs.push(<input className="sudokuSlot inputs_normal_color" id={i} min='1' max='9' type='number' key={i}/>);
+            }
         }
+        
         return all_Inputs; 
     };
+
+    const render_solution = () => {
+        if (firstRender === false){
+            const soluce = solution.map((row, idxr) => <tr key={'row' + idxr.toString()}>
+                {row.map((elem, idxe) => 
+                    {if((~~(idxr / 3) !== 1 && ~~(idxe / 3) !== 1) || (~~(idxr / 3) === 1 && ~~(idxe / 3) === 1)) {
+                        return <td className="soluce_side_color" key={'slot' + idxe.toString()}>{elem}</td>
+                    }
+                    else{
+                        return <td className="soluce_normal_color" key={'slot' + idxe.toString()}>{elem}</td>
+                    }} 
+                )}
+            </tr>)
+
+            return soluce;
+        }   
+    }
 
     return (
         <div>
@@ -157,10 +170,16 @@ const Sudoku = () => {
                         {render_inputs()}
                     </div>
                     <div id="formButtons">
-                        <input id='submitButton' type='submit' value='Solve'/> 
-                        <input type='reset' onClick={resetAll} value='Clear'/> 
+                        <button id='submitButton' type='submit'>SOLVE <i class="fa-solid fa-robot"></i></button> 
+                        <button id='resetButton' type='reset' onClick={resetAll}>CLEAR <i class="fa-solid fa-trash-can"></i></button> 
                     </div>
                 </form>
+
+                {solution.length > 0 && <table>
+                    <tbody id='solution'>
+                        {render_solution()}
+                    </tbody>
+                </table>}
                 
             </div>
         </div>
