@@ -1,44 +1,93 @@
+@use '../settings' as *;
+
 #sudoku {
     text-align: center;
-}
+    display: flex;
+    justify-content: space-around;
+    font-family: sans-serif;
 
-#sudoku #sudokuForm {
-    max-width: 480px;
-    margin: 0 auto 0;
 
-    #inputs{
-        display: grid;
-        margin-left: auto;
-        margin-right: auto;
-        grid-template-columns: repeat(9, 1fr);
-        grid-template-rows: repeat(9, 1fr);
-        grid-gap: 3px;
+    #sudokuForm {
+        max-width: 480px;
+        flex-shrink: 0;
+    
+        #inputs{
+            display: grid;
+            margin-left: auto;
+            margin-right: auto;
+            grid-template-columns: repeat(9, 1fr);
+            grid-template-rows: repeat(9, 1fr);
+            border: 1px solid $light;
 
-        .sudokuSlot {
-            -moz-appearance: textfield;
-            height: 50px;
-            width: 50px;
+            .sudokuSlot {
+                border: 2px solid $dark;
+                -moz-appearance: textfield;
+                height: 40px;
+                width: 40px;
+                text-align: center;
+                font-size: 30px;
+            }
+    
+            .sudokuSlot::-webkit-outer-spin-button, .sudokuSlot::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+
+        .inputs_side_color {
+            background-color: $maxlight;
+        }
+    
+        #formButtons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+
+            button {
+                i   {
+                    vertical-align: top;
+                }
+                align-items: center;
+                height: 35px;
+                width: 100px;
+                border-radius: 6px;
+                border: none;
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            #submitButton {
+                color: $dark;
+                background-color: $verylight;
+            }
+
+            #resetButton {
+                color: $verylight;
+                background-color: $dark;
+                border: 3px solid $verylight;
+            }
+        }
+    }
+
+    table {
+        flex-shrink: 0;
+        max-width: 480px;
+        color:white;
+        height: 100%;
+        border-collapse: collapse;
+
+        td {
             text-align: center;
+            width: 50px;
+            height: 50px;
+            border: 2px solid $light;
             font-size: 30px;
         }
 
-        .sudokuSlot::-webkit-outer-spin-button, .sudokuSlot::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-    }
-
-    #formButtons {
-        margin-top: 20px;
-        display: flex;
-        justify-content: space-around;
-
-        input {
-            height: 50px;
-            width: 120px;
+        .soluce_side_color {
+            background-color: $normal;
         }
     }
 }
-
 
 

@@ -55,7 +55,7 @@
         color : white;
         background-color: $darkbg;
         height: 50vh;
-        padding-top: 10%;
+        //padding-top: 10%;
 
         h4 {
             text-align: center;
@@ -87,6 +87,79 @@
                     color: white;
                     i {
                         color: $maxlight;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    #home {    
+        #intro {
+            img {
+                object-position: 40% 0;
+            }
+
+            h1 {
+                padding-top: 100px;
+                padding-bottom: 50px;
+                font-size: 45px;
+            }
+    
+            h3 {
+                font-size: $size_h3_main_mobile;
+                max-width: 80%;
+                margin: 30% auto;
+            }
+        }
+
+        #main {
+            height: 100%;
+    
+            h3 {
+                max-width: 80%;
+                padding-top: 50px;
+                font-size: 23px;
+            }
+        }
+
+        #about {
+            background-color: $darkbg;
+            height: 50vh;
+            //padding-top: 10%;
+    
+            h4 {
+                text-align: center;
+                font-size: 30px;
+                span {
+                    display:block;
+                    color: $verylight
+                }
+            }
+            h5 {
+                text-align: center;
+                color: $maxlight;
+                font-size: 25px;
+                font-style: italic;
+            }
+    
+            #list_contact {
+                display: flex;
+                max-width: 50%;
+                justify-content: space-around;
+                align-items: center;
+                margin: 5% auto;
+    
+                .list_element {
+                    list-style: none;
+                    
+                    a {
+                        text-decoration: none;
+                        color: white;
+                        i {
+                            color: $maxlight;
+                        }
                     }
                 }
             }
