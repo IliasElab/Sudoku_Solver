@@ -22,8 +22,8 @@
             .sudokuSlot {
                 border: 2px solid $dark;
                 -moz-appearance: textfield;
-                height: 40px;
-                width: 40px;
+                height: 50px;
+                width: 50px;
                 text-align: center;
                 font-size: 30px;
             }
@@ -51,12 +51,12 @@
                 height: 35px;
                 width: 100px;
                 border-radius: 6px;
-                border: none;
                 font-size: 18px;
                 font-weight: 600;
             }
 
             #submitButton {
+                border: none;
                 color: $dark;
                 background-color: $verylight;
             }
@@ -64,7 +64,7 @@
             #resetButton {
                 color: $verylight;
                 background-color: $dark;
-                border: 3px solid $verylight;
+                border: 3.5px solid $verylight;
             }
         }
     }
@@ -91,3 +91,184 @@
 }
 
 
+@media (max-width: 950px) and (min-width: 781px) {
+    #sudoku {
+        flex-direction: column;
+        gap:70px;
+    
+        #sudokuForm {
+            max-width: 90vw;
+            margin: 0 auto;
+
+            #inputs{    
+                .sudokuSlot {
+                    max-width: 70px;
+                    max-height: 70px;
+                    height: 9vw;
+                    width: 9vw;
+                    font-size: 50px;
+                }
+            }
+        
+            #formButtons {
+                padding: 30px 0;
+                button {
+                    height: 50px;
+                    width: 160px;
+                    border-radius: 20px;
+                    font-size: 25px;
+                }
+            }
+        }
+    
+        table {
+            max-width: 90vw;
+            max-height: 90vw;
+            margin: 0 auto;
+    
+            td {
+                max-width: 70px;
+                height: 66px;
+                width: 9vw;
+                font-size: 50px;
+            }
+        }
+    }
+}
+
+@media (max-width: 780px) and (min-width: 481px) {
+    #sudoku {
+        flex-direction: column;
+        gap:40px;
+    
+        #sudokuForm {
+            max-width: 90vw;
+            margin: 0 auto;
+
+            #inputs{    
+                .sudokuSlot {
+                    max-width: 70px;
+                    max-height: 70px;
+                    height: 10vw;
+                    width: 10vw;
+                    font-size: 45px;
+                }
+            }
+        
+            #formButtons {
+                padding: 30px 0;
+                button {
+                    height: 50px;
+                    width: 160px;
+                    border-radius: 20px;
+                    font-size: 25px;
+                }
+            }
+        }
+    
+        table {
+            max-width: 630px;
+            max-height: 630px;
+            margin: 0 auto;
+    
+            td {
+                max-width: 70px;
+                height: min(10vw, 66px);
+                width: 10vw;
+                font-size: 45px;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) and (min-width:351px) {
+    #sudoku {
+        flex-direction: column;
+        gap:40px;
+    
+        #sudokuForm {
+            max-width: 90vw;
+            margin: 0 auto;
+
+            #inputs{    
+                .sudokuSlot {
+                    height: 10vw;
+                    width: 10vw;
+                    font-size: 25px;
+                }
+            }
+        
+            #formButtons {
+    
+                button {
+                    i   {
+                        vertical-align: top;
+                    }
+                    align-items: center;
+                    height: 35px;
+                    width: 100px;
+                    border-radius: 15px;                 
+                    font-size: 18px;
+                }
+            }
+        }
+    
+        table {
+            max-width: 90vw;
+            margin: 0 auto;
+            table-layout: fixed;
+    
+            td {
+                height: 10vw;
+                width: 10vw;
+                font-size: 25px;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 350px) {
+    #sudoku {
+        flex-direction: column;
+        gap:60px;
+    
+        #sudokuForm {
+            max-width: 90vw;
+            margin: 0 auto;
+
+            #inputs{    
+                .sudokuSlot {
+                    height: 10vw;
+                    width: 10vw;
+                    font-size: 20px;
+                }
+            }
+        
+            #formButtons {
+    
+                button {
+                    i   {
+                        vertical-align: top;
+                    }
+                    align-items: center;
+                    height: 30px;
+                    width: 90px;
+                    border-radius: 12px;                 
+                    font-size: 15px;
+                }
+            }
+        }
+    
+        table {
+            max-width: 90vw;
+            margin: 0 auto;
+    
+            td {
+                height: 10vw;
+                width: 10vw;
+                font-size: 20px;
+            }
+        }
+    }
+}

@@ -170,8 +170,8 @@ const Sudoku = () => {
                         {render_inputs()}
                     </div>
                     <div id="formButtons">
-                        <button id='submitButton' type='submit'>SOLVE <i class="fa-solid fa-robot"></i></button> 
-                        <button id='resetButton' type='reset' onClick={resetAll}>CLEAR <i class="fa-solid fa-trash-can"></i></button> 
+                        <button id='submitButton' type='submit'>SOLVE <i className="fa-solid fa-robot"></i></button> 
+                        <button id='resetButton' type='reset' onClick={resetAll}>CLEAR <i className="fa-solid fa-trash-can"></i></button> 
                     </div>
                 </form>
 
