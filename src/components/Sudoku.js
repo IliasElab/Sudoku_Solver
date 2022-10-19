@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 
 const Sudoku = () => {
     const [data, setData] = useState([]);
-    const [solution, setSolution] = useState([])
-    const [firstRender, setfirstRender] = useState(true)
+    const [solution, setSolution] = useState([]);
+    const [firstRender, setfirstRender] = useState(true);
+    const [wrongSudoku, setWrongSudoku] = useState(false);
+    const [wrongInput, setWrongInput] = useState(-1);
     const nb_of_input = 81;
 
     //When the page is rendered for the first time, change firstRender value
@@ -39,11 +41,14 @@ const Sudoku = () => {
                 }
                 return false;
             }
-            if (isValid(data)){
+            setWrongInput(-1);
+            const wrongSlot = isWrong(data);
+            if (!wrongSlot){
                 solving(data);
             }
             else {
-                console.log("Not a Valid Sudoku");
+                setWrongSudoku(true);
+                setWrongInput(wrongSlot[0] * 9 + wrongSlot[1])
             }
         } 
     }, [data])
@@ -61,9 +66,11 @@ const Sudoku = () => {
     function resetAll() {
         setData([]);
         setSolution([]);
+        setWrongSudoku(false);
+        setWrongInput(-1);
     }
 
-    function isValid(board){
+    function isWrong(board){
         let rows = [new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set()]
         let cols = [new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set()]
         let squares = [new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set()]
@@ -73,7 +80,7 @@ const Sudoku = () => {
                 let number = board[i][j];
                 if (number !== 0){
                     if (rows[i].has(number) || cols[j].has(number) || squares[~~(i / 3) * 3 + ~~(j / 3)].has(number)){
-                        return false;
+                        return [i, j];
                     }        
                     rows[i].add(number);
                     cols[j].add(number);
@@ -81,7 +88,7 @@ const Sudoku = () => {
                 }
             }
         }
-        return true;
+        return false;
     }
 
     function isSafe(board, row, col, num){
@@ -135,10 +142,10 @@ const Sudoku = () => {
             const idxr = ~~(i / 9);
             const idxe = i % 9;
             if((~~(idxr / 3) !== 1 && ~~(idxe / 3) !== 1) || (~~(idxr / 3) === 1 && ~~(idxe / 3) === 1)){
-                all_Inputs.push(<input className="sudokuSlot inputs_side_color" id={i} min='1' max='9' type='number' key={i}/>);
+                all_Inputs.push(<input className={wrongInput === i ? "sudokuSlot inputs_side_color red_input" : "sudokuSlot inputs_side_color"} id={i} min='1' max='9' type='number' key={i}/>);
             }
             else {
-                all_Inputs.push(<input className="sudokuSlot inputs_normal_color" id={i} min='1' max='9' type='number' key={i}/>);
+                all_Inputs.push(<input className={wrongInput === i ? "sudokuSlot inputs_normal_color red_input" : "sudokuSlot inputs_normal_color"} id={i} min='1' max='9' type='number' key={i}/>);
             }
         }
         
@@ -173,7 +180,9 @@ const Sudoku = () => {
                         <button id='submitButton' type='submit'>SOLVE <i className="fa-solid fa-robot"></i></button> 
                         <button id='resetButton' type='reset' onClick={resetAll}>CLEAR <i className="fa-solid fa-trash-can"></i></button> 
                     </div>
+                    {wrongSudoku && <div id='wrongContainer'><button onClick={() => setWrongSudoku(false)} id='wrongSudoku'>Hum... Your Sudoku seems to be wrong, check the NUMBER and ROW / COLUMN / SQUARE he is in</button></div>}
                 </form>
+                
 
                 {solution.length > 0 && <table>
                     <tbody id='solution'>
