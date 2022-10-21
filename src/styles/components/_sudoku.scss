@@ -27,8 +27,12 @@
                 font-size: 30px;
             }
 
+            .sudokuSlot:out-of-range {
+                background-color: red;
+            }
+
             .red_input {
-                border: 2px solid red;
+                background-color: red;
             }
     
             .sudokuSlot::-webkit-outer-spin-button, .sudokuSlot::-webkit-inner-spin-button {
@@ -78,8 +82,8 @@
             #wrongSudoku {
                 max-width: 80%;
                 padding: 5px 5px;
-                background-image: linear-gradient(45deg, rgb(206, 35, 35),rgb(236, 15, 15));
-                box-shadow: 2px 3px #770e0e;
+                background-image: linear-gradient(45deg, rgb(184, 32, 32),rgb(236, 15, 15));
+                box-shadow: 2px 3px #8a0909;
                 position:absolute;
                 bottom: 100px;
                 border-radius: 20px;

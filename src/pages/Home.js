@@ -19,8 +19,8 @@ const Home = () => {
             </section>
 
             <section id='about'>
-                <h4>This Website in made by : <span>Ilias El-Abbassi</span></h4>
-                <h5>Software Engineer</h5>
+                <h2>This Website in made by : <span>Ilias El-Abbassi</span></h2>
+                <h3>Software Engineer</h3>
 
                 <ul id="list_contact">
                     <li className="list_element"><a href="mailto:elab.ilias@gmail.com"><i className="fa-solid fa-paper-plane"></i> My Mail</a></li>
