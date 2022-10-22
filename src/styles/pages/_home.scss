@@ -7,6 +7,10 @@
     #intro {
         height: 100vh;
         background-image: linear-gradient(to bottom, rgba(2, 12, 24, 0,) 50%,rgb(4, 19, 35) 100%);
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        gap: 90px;
 
         img {
             z-index: -10;
@@ -18,8 +22,7 @@
         }
     
         h1 {
-            padding-top: 100px;
-            padding-bottom: 50px;
+            padding-top: 50px;
             color: $maxlight;
             text-align: center;
             font-size: 75px;
@@ -31,10 +34,26 @@
             }
             font-size: 45px;
             text-align: center;
-            max-width: 50%;
-            margin: 5% auto;
+            max-width: 60%;
+            margin: 0 auto;
             color: white;
         }
+
+        #fingerDiv {
+            position: absolute;
+            bottom: 2%;
+            left:50%;
+
+            text-align: center;
+            i {
+                position: relative;
+                left: -50%;
+                color:white;
+                font-size: 40px;
+            }
+        }
+
+
     }
 
     #main {
@@ -94,6 +113,38 @@
     }
 }
 
+@media (max-width: 1440px) and (min-width: 951px) {
+    #home {    
+        #intro {           
+            h1 {
+                font-size: 65px;
+            }
+    
+            h3 {
+                font-size: 40px;
+                max-width: 70%;
+            }
+        }
+    
+        #main {    
+            height: 100%;
+            h3 {
+                padding-top: 50px;
+                max-width: 70%;
+                margin: 0 auto 50px;
+                font-size: 35px;
+            }
+            padding-bottom: 100px;
+        }
+    
+        #about {        
+            #list_contact {
+                max-width: 80%;
+            }
+        }
+    }
+}
+
 @media (max-width: 950px) and (min-width: 781px) {
     #home {    
         #intro {    
@@ -107,9 +158,8 @@
             }
     
             h3 {
-                font-size: 40px;
+                font-size: 35px;
                 max-width: 70%;
-                margin: 5% auto;
             }
         }
     
@@ -119,7 +169,7 @@
                 padding-top: 50px;
                 max-width: 70%;
                 margin: 0 auto 50px;
-                font-size: 35px;
+                font-size: 30px;
             }
             padding-bottom: 100px;
         }
@@ -141,7 +191,8 @@
 
 @media (max-width: 780px) and (min-width: 481px) {
     #home {    
-        #intro {    
+        #intro {   
+            gap: 50px; 
             img {
                 object-position: 35% 0;
             }
@@ -153,9 +204,8 @@
             }
     
             h3 {
-                font-size: 35px;
+                font-size: 30px;
                 max-width: 70%;
-                margin: 10% auto;
             }
         }
     
@@ -211,7 +261,6 @@
             h3 {
                 font-size: 25px;
                 max-width: 80%;
-                margin: 20% auto;
             }
         }
 
@@ -268,7 +317,6 @@
             h3 {
                 font-size: 25px;
                 max-width: 80%;
-                margin: 25% auto;
             }
         }
 

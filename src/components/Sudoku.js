@@ -180,7 +180,7 @@ const Sudoku = () => {
                         <button id='submitButton' type='submit'>SOLVE <i className="fa-solid fa-robot"></i></button> 
                         <button id='resetButton' type='reset' onClick={resetAll}>CLEAR <i className="fa-solid fa-trash-can"></i></button> 
                     </div>
-                    {wrongSudoku && <div id='wrongContainer'><button onClick={() => setWrongSudoku(false)} id='wrongSudoku'>Hum... Your Sudoku seems to be wrong, check the NUMBER and ROW / COLUMN / SQUARE he is in</button></div>}
+                    {wrongSudoku && <div id='wrongContainer'><button onClick={() => setWrongSudoku(false)} id='wrongSudoku'>Hum... Your Sudoku seems to be wrong, check the <span>NUMBER</span> and <span>ROW</span> / <span>COLUMN</span> / <span>SQUARE</span> he is in</button></div>}
                 </form>
                 
 

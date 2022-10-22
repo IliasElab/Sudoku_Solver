@@ -11,6 +11,7 @@ const Home = () => {
                 <h1>Sudoku Solver</h1>
                 <h3>Sudokus can be fun but sometimes quite frustrating</h3>
                 <h3><span>Javascript</span> can help us to solve the Sudoku we are stuck on</h3>
+                <div id='fingerDiv'><i class="fa-solid fa-hand-point-down"></i></div>
             </section>
             
             <section id="main">
