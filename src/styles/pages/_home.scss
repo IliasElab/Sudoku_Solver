@@ -1,6 +1,15 @@
 @use '../settings' as *;
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,300&display=swap');
 
+@keyframes fingerAnimation {
+    0% {bottom: 2%}
+    10% {bottom: 4%}
+    20% {bottom: 3%}
+    30% {bottom: 4%}
+    40% {bottom: 2%}
+    100% {bottom: 2%}
+}
+
 #home {
     font-family: 'Montserrat', sans-serif;
 
@@ -43,6 +52,9 @@
             position: absolute;
             bottom: 2%;
             left:50%;
+            animation-name: fingerAnimation;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
 
             text-align: center;
             i {
@@ -51,6 +63,10 @@
                 color:white;
                 font-size: 40px;
             }
+        }
+
+        .scrolled {
+            visibility: hidden;
         }
 
 
@@ -111,6 +127,26 @@
             }
         }
     }
+    .reveal-Y{
+        position: relative;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: 1s all ease;
+    }
+
+    .reveal-X{
+        position: relative;
+        transform: translateX(100px);
+        opacity: 0;
+        transition: 1s all ease;
+    }
+
+    .reveal-X.active, .reveal-Y.active{
+        transform: translateY(0);
+        transform: translateX(0);
+        opacity: 1;
+    }
+
 }
 
 @media (max-width: 1440px) and (min-width: 951px) {

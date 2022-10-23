@@ -9,67 +9,6 @@ const Sudoku = () => {
     const [wrongInput, setWrongInput] = useState(-1);
     const nb_of_input = 81;
 
-    //When the page is rendered for the first time, change firstRender value
-    useEffect(() => {
-        setfirstRender(false);
-    }, []) 
-
-    useEffect(() => {
-        //Avoid the useEffect to load if it is the first Render of the component
-        
-        if (!firstRender && data.length !== 0){
-            function solving(board) {
-                let emptySpot = nextSlot(board);
-                let [row, col, isComplete] = emptySpot;
-            
-                if (isComplete){
-                    setSolution(board)
-                    return true;
-                }
-            
-                for(let num = 1; num <= 9; num++){
-                    if (isSafe(board, row, col, num)){
-                        board[row][col] = num;
-            
-                        if (solving(board)){
-                            return true;
-                        }
-                        else{
-                            board[row][col] = 0;
-                        }
-                    }
-                }
-                return false;
-            }
-            setWrongInput(-1);
-            const wrongSlot = isWrong(data);
-            if (!wrongSlot){
-                solving(data);
-            }
-            else {
-                setWrongSudoku(true);
-                setWrongInput(wrongSlot[0] * 9 + wrongSlot[1])
-            }
-        } 
-    }, [data])
-
-    function nextSlot(board) {
-        for (var i = 0; i < 9; i++) {
-            for (var j = 0; j < 9; j++) {
-                if (board[i][j] === 0) 
-                    return [i, j, false];
-            }
-        }
-        return [-1, -1, true];
-    }
-
-    function resetAll() {
-        setData([]);
-        setSolution([]);
-        setWrongSudoku(false);
-        setWrongInput(-1);
-    }
-
     function isWrong(board){
         let rows = [new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set()]
         let cols = [new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set()]
@@ -117,8 +56,72 @@ const Sudoku = () => {
         return true;
     }
 
+    function nextSlot(board) {
+        for (var i = 0; i < 9; i++) {
+            for (var j = 0; j < 9; j++) {
+                if (board[i][j] === 0) 
+                    return [i, j, false];
+            }
+        }
+        return [-1, -1, true];
+    }
+
+    //When the page is rendered for the first time, change firstRender value
+    useEffect(() => {
+        setfirstRender(false);
+    }, []) 
+
+    useEffect(() => {
+        //Avoid the useEffect to load if it is the first Render of the component
+        if (!firstRender && data.length !== 0){
+            function solving(board) {
+                let emptySpot = nextSlot(board);
+                let [row, col, isComplete] = emptySpot;
+            
+                if (isComplete){
+                    setSolution(board)
+                    return true;
+                }
+            
+                for(let num = 1; num <= 9; num++){
+                    if (isSafe(board, row, col, num)){
+                        board[row][col] = num;
+            
+                        if (solving(board)){
+                            return true;
+                        }
+                        else{
+                            board[row][col] = 0;
+                        }
+                    }
+                }
+                return false;
+            }
+            
+            const wrongSlot = isWrong(data);
+
+            if (!wrongSlot){
+                solving(data);
+            }
+            else {
+                setWrongSudoku(true);
+                setWrongInput(wrongSlot[0] * 9 + wrongSlot[1])
+            }
+        } 
+    }, [data])
+
+    function resetAll() {
+        setData([]);
+        setSolution([]);
+        setWrongSudoku(false);
+        setWrongInput(-1);
+    }   
+
     function handleSubmit(e) {
         e.preventDefault();
+        setWrongSudoku(false);
+        setWrongInput(-1);
+
         let filled_Sudoku = [[], [], [], [], [], [], [], [], []];
         
         for (let i = 0; i < 9; i++) {
@@ -183,13 +186,11 @@ const Sudoku = () => {
                     {wrongSudoku && <div id='wrongContainer'><button onClick={() => setWrongSudoku(false)} id='wrongSudoku'>Hum... Your Sudoku seems to be wrong, check the <span>NUMBER</span> and <span>ROW</span> / <span>COLUMN</span> / <span>SQUARE</span> he is in</button></div>}
                 </form>
                 
-
                 {solution.length > 0 && <table>
                     <tbody id='solution'>
                         {render_solution()}
                     </tbody>
-                </table>}
-                
+                </table>}            
             </div>
         </div>
     );
