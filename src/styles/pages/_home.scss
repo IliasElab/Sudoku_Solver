@@ -10,6 +10,15 @@
     100% {bottom: 2%}
 }
 
+@keyframes underlineContact {
+    0% {bottom: 2%}
+    10% {bottom: 4%}
+    20% {bottom: 3%}
+    30% {bottom: 4%}
+    40% {bottom: 2%}
+    100% {bottom: 2%}
+}
+
 #home {
     font-family: 'Montserrat', sans-serif;
 
@@ -73,6 +82,7 @@
     }
 
     #main {
+        display: block;
         height: 100vh;
         background-color: $darkbg;
         font-family: 'Montserrat', sans-serif;
@@ -87,9 +97,9 @@
     }
 
     #about {
+        display:block;
         color : white;
         background-color: $darkbg;
-        height: 50vh;
 
         h2 {
             text-align: center;
@@ -111,17 +121,41 @@
             max-width: 50%;
             justify-content: space-around;
             align-items: center;
-            margin: 5% auto;
+            margin: 0 auto;
+            padding : 5%;
 
             .list_element {
-                list-style: none;
-                
+                list-style: none;                
                 a {
                     font-size: 25px;
                     text-decoration: none;
                     color: white;
                     i {
                         color: $maxlight;
+                    }
+                }
+
+                a:hover {
+                    position: relative;
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        height: 3px;
+                        width: 0;
+                        background-color: $verylight;
+                        bottom: -5px;
+                        border-radius: 10px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        -webkit-animation: underbor 0.5s ease forwards;
+                        animation: underbor 0.5s ease forwards;
+
+                        @keyframes underbor {
+                            to {width: 90%;}
+                        }
+                        @-webkit-keyframes underbor {
+                            to {width: 90%;}
+                        }
                     }
                 }
             }
@@ -142,6 +176,7 @@
     }
 
     .reveal-X.active, .reveal-Y.active{
+        position: initial;
         transform: translateY(0);
         transform: translateX(0);
         opacity: 1;
@@ -170,10 +205,10 @@
                 margin: 0 auto 50px;
                 font-size: 35px;
             }
-            padding-bottom: 100px;
         }
     
-        #about {        
+        #about {      
+            padding-top: 100px;  
             #list_contact {
                 max-width: 80%;
             }
@@ -207,10 +242,10 @@
                 margin: 0 auto 50px;
                 font-size: 30px;
             }
-            padding-bottom: 100px;
         }
     
         #about {    
+            padding-top: 100px;
             h2 {
                 font-size: 30px;
             }
@@ -253,10 +288,10 @@
                 margin: 0 auto 50px;
                 font-size: 30px;
             }
-            padding-bottom: 100px;
         }
     
         #about {    
+            padding-top: 100px;
             h2 {
                 font-size: 28px;
             }
@@ -265,14 +300,15 @@
             }
     
             #list_contact {
-                max-width: 80%;
-                padding-top: 10px;
+                max-width: 100%;
+                padding-top: 30px;
                 align-items: flex-start;
-                gap:10px;
+                flex-wrap: wrap;
+                gap:20px;
 
                 .list_element {                    
                     a {
-                        font-size: 19px;
+                        font-size: 28px;
                     }
                 }
                 
@@ -285,6 +321,7 @@
     #home {    
         width: 100vw;
         #intro {
+            gap: 40px; 
             img {
                 object-position: 35% 0;
             }
@@ -311,8 +348,7 @@
         }
 
         #about {
-            padding-top: 20%;
-    
+            padding-top: 75px;
             h2 {
                 font-size: 25px;
             }
@@ -323,6 +359,7 @@
     
             #list_contact {
                 padding-top: 10px;
+                max-width: 80%;
                 flex-direction: column;
                 align-items: flex-start;
                 gap:10px;
@@ -341,6 +378,7 @@
     #home {    
         width: 100vw;
         #intro {
+            gap: 30px; 
             img {
                 object-position: 30% 0;
             }
@@ -367,8 +405,7 @@
         }
 
         #about {
-            padding-top: 20%;
-    
+            padding-top: 50px;
             h2 {
                 font-size: 20px;
             }
@@ -379,6 +416,7 @@
     
             #list_contact {
                 padding-top: 10px;
+                max-width: 80%;
                 flex-direction: column;
                 align-items: flex-start;
                 gap:10px;

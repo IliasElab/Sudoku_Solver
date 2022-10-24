@@ -9,14 +9,14 @@ const Home = () => {
         const sudokuElement = document.querySelector('.reveal-Y')
         const contactList = document.querySelector('.reveal-X')
 
-        if(window.scrollY > 1.2 * window.innerHeight) {
+        if(window.scrollY > 0.8 * (document.documentElement.scrollHeight - window.innerHeight)) {
             contactList.classList.add('active')     
             window.removeEventListener("scroll", scrollReveal);      
         }
-        else if(window.scrollY > 0.95 * window.innerHeight){
+        else if(window.scrollY > 0.9 * window.innerHeight){
             finger.classList.add('scrolled')
         }
-        else if(window.scrollY > 0.4 * window.innerHeight) {
+        else if(window.scrollY > 0.6 * window.innerHeight) {
             sudokuElement.classList.add('active') 
         }
     }
@@ -32,12 +32,10 @@ const Home = () => {
                 <h3><span>Javascript</span> can help us to solve the Sudoku we are stuck on</h3>
                 <div id='fingerDiv'><i className="fa-solid fa-hand-point-down"></i></div>
             </section>
-            
             <section id="main">
                 <h3 id='left_h3'>Enter your Sudoku and let Javascript find the solution for you !</h3>
                 <div className='reveal-Y'><Sudoku/></div>
             </section>
-
             <section id='about'>
                 <h2>This Website in made by : <span>Ilias El-Abbassi</span></h2>
                 <h3>Software Engineer</h3>
@@ -48,7 +46,6 @@ const Home = () => {
                     <li className="list_element"><a href="https://github.com/IliasElab"><i className="fa-brands fa-github"></i> My Github</a></li>
                 </ul>
             </section>
-            
         </div>
     );
     
