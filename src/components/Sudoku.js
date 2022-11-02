@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState } from 'react';
 
 const Sudoku = () => {
-    const [data, setData] = useState([]);
     const [solution, setSolution] = useState([]);
-    const [firstRender, setfirstRender] = useState(true);
     const [wrongSudoku, setWrongSudoku] = useState(false);
     const [wrongInput, setWrongInput] = useState(-1);
-    const nb_of_input = 81;
-
+    
     function isWrong(board){
         let rows = [new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set()]
         let cols = [new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set(), new Set()]
@@ -59,65 +55,44 @@ const Sudoku = () => {
     function nextSlot(board) {
         for (var i = 0; i < 9; i++) {
             for (var j = 0; j < 9; j++) {
-                if (board[i][j] === 0) 
+                if (board[i][j] === 0){
                     return [i, j, false];
+                }
             }
         }
         return [-1, -1, true];
     }
 
-    //When the page is rendered for the first time, change firstRender value
-    useEffect(() => {
-        setfirstRender(false);
-    }, []) 
-
-    useEffect(() => {
-        //Avoid the useEffect to load if it is the first Render of the component
-        if (!firstRender && data.length !== 0){
-            function solving(board) {
-                let emptySpot = nextSlot(board);
-                let [row, col, isComplete] = emptySpot;
-            
-                if (isComplete){
-                    setSolution(board)
+    function solving(board) {
+        let emptySpot = nextSlot(board);
+        let [row, col, isComplete] = emptySpot;
+    
+        if (isComplete){
+            setSolution(board)
+            return true;
+        }
+    
+        for(let num = 1; num <= 9; num++){
+            if (isSafe(board, row, col, num)){
+                board[row][col] = num;
+                if (solving(board)){
                     return true;
                 }
-            
-                for(let num = 1; num <= 9; num++){
-                    if (isSafe(board, row, col, num)){
-                        board[row][col] = num;
-            
-                        if (solving(board)){
-                            return true;
-                        }
-                        else{
-                            board[row][col] = 0;
-                        }
-                    }
+                else{
+                    board[row][col] = 0;
                 }
-                return false;
             }
-            
-            const wrongSlot = isWrong(data);
-
-            if (!wrongSlot){
-                solving(data);
-            }
-            else {
-                setWrongSudoku(true);
-                setWrongInput(wrongSlot[0] * 9 + wrongSlot[1])
-            }
-        } 
-    }, [data])
+        }
+        return false;
+    }
 
     function resetAll() {
-        setData([]);
         setSolution([]);
         setWrongSudoku(false);
         setWrongInput(-1);
-    }   
+    }
 
-    function handleSubmit(e) {
+    function handleSubmitAndSolve(e) {
         e.preventDefault();
         setWrongSudoku(false);
         setWrongInput(-1);
@@ -136,12 +111,21 @@ const Sudoku = () => {
             }
             
         }
-        setData(filled_Sudoku);  
+
+        const wrongSlot = isWrong(filled_Sudoku);
+
+        if (!wrongSlot){
+            solving(filled_Sudoku);
+        }
+        else {
+            setWrongSudoku(true);
+            setWrongInput(wrongSlot[0] * 9 + wrongSlot[1])
+        }
     }
 
     const render_inputs = () => {
         let all_Inputs = [];
-        for (let i = 0; i < nb_of_input; i++) {
+        for (let i = 0; i < 81; i++) {
             const idxr = ~~(i / 9);
             const idxe = i % 9;
             if((~~(idxr / 3) !== 1 && ~~(idxe / 3) !== 1) || (~~(idxr / 3) === 1 && ~~(idxe / 3) === 1)){
@@ -152,30 +136,28 @@ const Sudoku = () => {
             }
         }
         
-        return all_Inputs; 
+        return all_Inputs;
     };
 
     const render_solution = () => {
-        if (firstRender === false){
-            const soluce = solution.map((row, idxr) => <tr key={'row' + idxr.toString()}>
-                {row.map((elem, idxe) => 
-                    {if((~~(idxr / 3) !== 1 && ~~(idxe / 3) !== 1) || (~~(idxr / 3) === 1 && ~~(idxe / 3) === 1)) {
-                        return <td className="soluce_side_color" key={'slot' + idxe.toString()}>{elem}</td>
-                    }
-                    else{
-                        return <td className="soluce_normal_color" key={'slot' + idxe.toString()}>{elem}</td>
-                    }} 
-                )}
-            </tr>)
+        const soluce = solution.map((row, idxr) => <tr key={'row' + idxr.toString()}>
+            {row.map((elem, idxe) => 
+                {if((~~(idxr / 3) !== 1 && ~~(idxe / 3) !== 1) || (~~(idxr / 3) === 1 && ~~(idxe / 3) === 1)) {
+                    return <td className="soluce_side_color" key={'slot' + idxe.toString()}>{elem}</td>
+                }
+                else{
+                    return <td className="soluce_normal_color" key={'slot' + idxe.toString()}>{elem}</td>
+                }}
+            )}
+        </tr>)
 
-            return soluce;
-        }   
+        return soluce;
     }
 
     return (
         <div>
             <div id ="sudoku">
-                <form id='sudokuForm' onSubmit={handleSubmit}>
+                <form id='sudokuForm' onSubmit={handleSubmitAndSolve}>
                     <div id='inputs'>
                         {render_inputs()}
                     </div>
@@ -190,7 +172,7 @@ const Sudoku = () => {
                     <tbody id='solution'>
                         {render_solution()}
                     </tbody>
-                </table>}            
+                </table>}
             </div>
         </div>
     );
