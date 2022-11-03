@@ -3,9 +3,9 @@
 
 @keyframes fingerAnimation {
     0% {bottom: 2%}
-    10% {bottom: 4%}
-    20% {bottom: 3%}
-    30% {bottom: 4%}
+    10% {bottom: 6%}
+    20% {bottom: 4%}
+    30% {bottom: 6%}
     40% {bottom: 2%}
     100% {bottom: 2%}
 }
@@ -140,21 +140,21 @@
                     &::after {
                         content: '';
                         position: absolute;
-                        height: 3px;
+                        height: 2px;
                         width: 0;
                         background-color: $verylight;
-                        bottom: -5px;
+                        bottom: -10px;
                         border-radius: 10px;
                         left: 50%;
                         transform: translateX(-50%);
-                        -webkit-animation: underbor 0.5s ease forwards;
-                        animation: underbor 0.5s ease forwards;
+                        -webkit-animation: underbor 0.8s ease forwards;
+                        animation: underbor 0.8s ease forwards;
 
                         @keyframes underbor {
-                            to {width: 80%;}
+                            to {width: 100%;}
                         }
                         @-webkit-keyframes underbor {
-                            to {width: 80%;}
+                            to {width: 100%;}
                         }
                     }
                 }

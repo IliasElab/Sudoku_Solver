@@ -105,11 +105,18 @@
     }   
     
     table {
+
+        @keyframes appear {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
         flex-shrink: 0;
         max-width: 480px;
         color:white;
         height: 100%;
         border-collapse: collapse;
+        animation: appear 1.5s ease;
 
         td {
             text-align: center;
