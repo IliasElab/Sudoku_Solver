@@ -93,7 +93,7 @@ function fillSudoku(startingBoard) {
     return false;
 }
   
-function removeKDigits(board, nb_Removed){
+function removeNbSlots(board, nb_Removed){
     while (nb_Removed !== 0){
         const cellId = Math.floor(Math.random() * 80);
         const i = ~~(cellId / 9);
@@ -108,4 +108,4 @@ function removeKDigits(board, nb_Removed){
 }
 
 
-export { isWrong, solving, fillSudoku, removeKDigits };
+export { isWrong, solving, fillSudoku, removeNbSlots };

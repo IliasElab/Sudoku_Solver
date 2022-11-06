@@ -49,6 +49,8 @@
             display: flex;
             justify-content: space-around;
             margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
 
             button {
                 i   {
@@ -71,6 +73,12 @@
                 border: none;
                 color: $dark;
                 background-color: $verylight;
+            }
+
+            #createButton {
+                border: none;
+                color: $dark;
+                background-color: $maxlight;
             }
 
             #resetButton {
