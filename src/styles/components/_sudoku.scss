@@ -41,8 +41,13 @@
             }
         }
 
+        //Prevent changing color on disabled slots
         .inputs_side_color {
             background-color: $maxlight;
+        }
+
+        .inputs_normal_color {
+            background-color: white;
         }
     
         #formButtons {
@@ -86,30 +91,12 @@
                 background-color: $dark;
                 border: 3.5px solid $verylight;
             }
-        }   
-        #wrongContainer {
-            position:relative;
-            display: flex;
-            justify-content: center;
-            span {
-                font-weight:600;
-                color: rgb(249, 175, 175);
+
+            #clearButton {
+                color: white;
+                background-color: rgb(203, 20, 20);
             }
-            #wrongSudoku {
-                height: 80px;
-                max-width: 80%;
-                padding: 5px 5px;
-                background-image: linear-gradient(45deg, rgb(204, 38, 38),rgb(183, 8, 8));
-                box-shadow: 2px 3px #8a0909;
-                position:absolute;
-                bottom: 100px;
-                border-radius: 20px;
-                border:none;
-                font-size: 15px;
-                color:white;
-            }
-        }
-        
+        }      
     }   
     
     table {
@@ -169,13 +156,6 @@
                     font-size: 25px;
                 }
             }
-
-            #wrongContainer {
-                #wrongSudoku {
-                    bottom: 200px;
-                    font-size: 15px;
-                }
-            }
         }
     
         table {
@@ -219,13 +199,6 @@
                     width: 160px;
                     border-radius: 20px;
                     font-size: 25px;
-                }
-            }
-            
-            #wrongContainer {
-                #wrongSudoku {
-                    bottom: 200px;
-                    font-size: 15px;
                 }
             }
         }

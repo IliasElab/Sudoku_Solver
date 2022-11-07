@@ -7,8 +7,14 @@ function isWrong(board) {
         for (let j = 0; j < 9; j++) {
             let number = board[i][j];
             if (number !== 0) {
-                if (rows[i].has(number) || cols[j].has(number) || squares[~~(i / 3) * 3 + ~~(j / 3)].has(number)) {
-                    return [i, j];
+                if (rows[i].has(number)) {
+                    return ['row', i];
+                }
+                else if (cols[j].has(number)) {
+                    return ['column', j];
+                }
+                else if (squares[~~(i / 3) * 3 + ~~(j / 3)].has(number)) {
+                    return ['square', ~~(i / 3) * 3 + ~~(j / 3)];
                 }
                 rows[i].add(number);
                 cols[j].add(number);
@@ -47,7 +53,7 @@ function nextSlot(board) {
 }
 
 function solving(board, starting) {
-    let emptySlot = nextSlot(board);
+    const emptySlot = nextSlot(board);
     let [row, col, isComplete] = emptySlot;
 
     if (starting) {
@@ -107,5 +113,11 @@ function removeNbSlots(board, nb_Removed){
     return board;
 }
 
+function createNewSudoku(difficulty) {
+    let board = fillSudoku([[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0]]);
+    board = removeNbSlots(board, difficulty);
+    return board;
+}
 
-export { isWrong, solving, fillSudoku, removeNbSlots };
+
+export { isWrong, solving, createNewSudoku };
