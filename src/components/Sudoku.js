@@ -1,55 +1,38 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState } from 'react';
 import { isWrong, solving, fillSudoku, removeNbSlots } from '../functions/SudokuFunctions.js';
 
-const emptySudoku = [['', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '']];
 
 const Sudoku = () => {
-    const [createSudoku, setCreateSudoku] = useState(false);
-    const [sudokuValues, setSudokuValues] = useState(emptySudoku);
+    const [sudokuValues, setSudokuValues] = useState([[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0]]);
     const [solution, setSolution] = useState([]);
     const [wrongSudoku, setWrongSudoku] = useState(false);
     const [wrongInput, setWrongInput] = useState(-1);
 
-    useEffect(() => {
-        
-
-        render_creation();
-
-    }, [createSudoku]);
-
     function resetAll() {
-        setSudokuValues(emptySudoku);
+        setSudokuValues([[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0]]);
         setSolution([]);
         setWrongSudoku(false);
         setWrongInput(-1);
     }
 
-
+    function createNewSudoku(difficulty) {
+        let board = fillSudoku([[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0]]);
+        board = removeNbSlots(board, difficulty);
+        return board;
+    }
 
     function handleSubmitAndSolve(e) {
         e.preventDefault();
         setWrongSudoku(false);
         setWrongInput(-1);
 
-        let filled_Sudoku = [[], [], [], [], [], [], [], [], []];
-        
-        for (let i = 0; i < 9; i++) {
-            for (let j = 0; j < 9; j++) {
-                let val = parseInt(e.target[i * 9 + j].value)
-
-                if (val > 0 && val < 10){ filled_Sudoku[i].push(val); }
-                else{ filled_Sudoku[i].push(0); }
-            }
-        }
-
-        const wrongSlot = isWrong(filled_Sudoku);
+        const wrongSlot = isWrong(sudokuValues);
 
         if (!wrongSlot){
-            const soluce = solving(filled_Sudoku, true, [0, 0]);
+            const soluce = solving(JSON.parse(JSON.stringify(sudokuValues)), true);
 
             if (soluce) { setSolution(soluce); }
-            else {console.log('Error : Impossible to Solve the Sudoku')}
+            else { console.log('Error : Impossible to Solve the Sudoku') }
         }
         else {
             setWrongSudoku(true);
@@ -57,10 +40,24 @@ const Sudoku = () => {
         }
     }
 
+    function handleChange(e) {
+        let copied = JSON.parse(JSON.stringify(sudokuValues));
+        const idr = ~~(e.target.id / 9);
+        const idc = e.target.id % 9;
 
+        if (e.target.value > 0 && e.target.value < 10){ copied[idr][idc] = parseInt(e.target.value); }
+        else{ copied[idr][idc] = 0; }
+
+        setSudokuValues(copied);
+        
+
+        if (wrongInput !== -1 && ~~(wrongInput / 9) === idr && wrongInput % 9 === idc){
+            setWrongSudoku(false);
+            setWrongInput(-1);
+        }
+    }
 
     function handleCreation() {
-        setCreateSudoku(true);
         render_creation();
     }
 
@@ -80,25 +77,9 @@ const Sudoku = () => {
             else {
                 all_Inputs.push(<input onChange={handleChange} value={sudokuValues[idxr][idxe] !== 0 ? sudokuValues[idxr][idxe] : ''} className={wrongInput === i ? "sudokuSlot inputs_normal_color red_input" : "sudokuSlot inputs_normal_color"} id={i} min='1' max='9' type='number' key={i}/>);
             }
-            
         }
         return all_Inputs;
     }
-
-    /*const render_inputs = () => {
-        let all_Inputs = [];
-        for (let i = 0; i < 81; i++) {
-            const idxr = ~~(i / 9);
-            const idxe = i % 9;
-            if((~~(idxr / 3) !== 1 && ~~(idxe / 3) !== 1) || (~~(idxr / 3) === 1 && ~~(idxe / 3) === 1)){
-                all_Inputs.push(<input className={wrongInput === i ? "sudokuSlot inputs_side_color red_input" : "sudokuSlot inputs_side_color"} id={i} min='1' max='9' type='number' key={i}/>);
-            }
-            else {
-                all_Inputs.push(<input className={wrongInput === i ? "sudokuSlot inputs_normal_color red_input" : "sudokuSlot inputs_normal_color"} id={i} min='1' max='9' type='number' key={i}/>);
-            }
-        }
-        return all_Inputs;
-    };*/
     
     const render_solution = () => {
         const soluce = solution.map((row, idxr) => <tr key={'row' + idxr.toString()}>
