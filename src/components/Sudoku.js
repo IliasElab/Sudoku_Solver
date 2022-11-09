@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { isWrong, solving, createNewSudoku } from '../functions/SudokuFunctions.js';
+import Creation from './Creation.js';
 
 
 const Sudoku = () => {
     const [sudokuValues, setSudokuValues] = useState([[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0]]);
     const [solution, setSolution] = useState([]);
     const [wrongInput, setWrongInput] = useState([]);
+    const [checkIsTrue, setCheckIsTrue] = useState(0);
     const [createdSudoku, setCreatedSudoku] = useState([[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0]]);
 
     function resetAll() {
@@ -40,8 +42,8 @@ const Sudoku = () => {
         const idr = ~~(e.target.id / 9);
         const idc = e.target.id % 9;
 
-        if (e.target.value > 0 && e.target.value < 10){ copied[idr][idc] = parseInt(e.target.value); }
-        else{ copied[idr][idc] = 0; }
+        if (e.target.value !== '' && !isNaN(e.target.value)){ copied[idr][idc] = Number(String(e.target.value)[0]); }
+        else { copied[idr][idc] = 0; }
 
         setSudokuValues(copied);
 
@@ -56,6 +58,30 @@ const Sudoku = () => {
         setSudokuValues(board);
         setCreatedSudoku(board);
         setSolution([]);
+    }
+
+    function handleChecking() {
+        const wrongSlot = isWrong(sudokuValues);
+
+        if (!wrongSlot){
+            const soluce = solving(JSON.parse(JSON.stringify(sudokuValues)), true);
+
+            if (soluce) { 
+                console.log("The Sudoku is Correct !");
+                setCheckIsTrue(1);
+                setTimeout(() => setCheckIsTrue(0), 2000);
+             }
+            else { 
+                console.log('The Sudoku cannot be solve, need some changes !');
+                setCheckIsTrue(-1);
+                setTimeout(() => setCheckIsTrue(0), 2000);
+            }
+        }
+        else {
+            setWrongInput(wrongSlot)
+            setCheckIsTrue(-1);
+            setTimeout(() => setCheckIsTrue(0), 2000);
+        }
     }
 
     function handleReset() {
@@ -99,13 +125,15 @@ const Sudoku = () => {
         <div>
             <div id ="sudoku">
                 <form id='sudokuForm' onSubmit={handleSubmitAndSolve}>
-                    <div id='inputs'>
+                    <div id='inputs' className={checkIsTrue !== 0 ? (checkIsTrue === 1 ? 'checkIsTrue' : 'checkIsFalse') : ''} >
                         {render_inputs()}
                     </div>
                     <div id="formButtons">
-                        <button id='createButton' type='button' onClick={handleCreation}>CREATE <i className="fa-solid fa-table-cells"></i></button>
+                        <Creation creationFunction={handleCreation} />
+                        {/*<button id='createButton' type='button' onClick={handleCreation}>CREATE <i className="fa-solid fa-table-cells"></i></button>*/}
                         <button id='submitButton' type='submit'>SOLVE <i className="fa-solid fa-robot"></i></button>
-                        <button id='resetButton' type='button' onClick={handleReset}>RESET <i className="fa-solid fa-arrows-rotate"></i></button>  
+                        <button id='resetButton' type='button' onClick={handleReset}>RESET <i className="fa-solid fa-arrows-rotate"></i></button>
+                        <button id='checkButton' type='button' onClick={handleChecking}>CHECK <i className="fa-solid fa-arrows-rotate"></i></button>  
                         <button id='clearButton' type='reset' onClick={resetAll}>CLEAR <i className="fa-solid fa-trash-can"></i></button> 
                     </div>
                 </form>

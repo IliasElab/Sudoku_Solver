@@ -7,7 +7,7 @@
     font-family: sans-serif;
 
     #sudokuForm {
-        max-width: 480px;
+        max-width: 450px;
         flex-shrink: 0;
     
         #inputs{
@@ -41,6 +41,33 @@
             }
         }
 
+        .checkIsTrue {
+            -webkit-animation: checkTrueShadow 2s;
+            animation: checkTrueShadow 2s;
+
+            @keyframes checkTrueShadow {
+                0% {box-shadow: none}
+                //35% {box-shadow: 0px 0px 20px 10px lightgreen;}
+                30% {box-shadow: 0px 0px 20px 15px rgb(57, 231, 57);}
+                60% {box-shadow: 0px 0px 20px 15px rgb(57, 231, 57);}
+                //65% {box-shadow: 0px 0px 20px 10px lightgreen;}
+                100% {box-shadow: none}
+            }
+        }
+
+        .checkIsFalse {
+            -webkit-animation: checkFalseShadow 0.65s;
+            animation: checkFalseShadow 0.65s;
+            animation-iteration-count: 3;
+
+            @keyframes checkFalseShadow {
+                0% {box-shadow: none}
+                25% {box-shadow: 0px 0px 20px 15px rgb(206, 26, 26);}
+                75% {box-shadow: 0px 0px 20px 15px rgb(206, 26, 26);}
+                100% {box-shadow: none}
+            }
+        }
+
         //Prevent changing color on disabled slots
         .inputs_side_color {
             background-color: $maxlight;
@@ -51,6 +78,8 @@
         }
     
         #formButtons {
+            max-width: 90%;
+            margin: 0 auto;
             display: flex;
             justify-content: space-around;
             margin-top: 20px;
@@ -68,28 +97,27 @@
                 font-size: 18px;
                 font-weight: 600;
                 transition: transform .3s;
+                border: none;
             }
-
+        
             button:hover {
                 transform: scale(1.2);
             }
 
             #submitButton {
-                border: none;
                 color: $dark;
                 background-color: $verylight;
-            }
-
-            #createButton {
-                border: none;
-                color: $dark;
-                background-color: $maxlight;
             }
 
             #resetButton {
                 color: $verylight;
                 background-color: $dark;
                 border: 3.5px solid $verylight;
+            }
+
+            #checkButton {
+                color: white;
+                background-color: rgb(26, 190, 97);
             }
 
             #clearButton {
@@ -100,7 +128,6 @@
     }   
     
     table {
-
         @keyframes appear {
             from {opacity: 0;}
             to {opacity: 1;}
@@ -132,9 +159,9 @@
     #sudoku {
         flex-direction: column;
         gap:70px;
-    
+
         #sudokuForm {
-            max-width: 90vw;
+            max-width: min(630px, 90vw);
             margin: 0 auto;
 
             #inputs{    
@@ -149,6 +176,7 @@
         
             #formButtons {
                 padding: 30px 0;
+
                 button {
                     height: 50px;
                     width: 160px;
@@ -179,7 +207,7 @@
         gap:40px;
     
         #sudokuForm {
-            max-width: 90vw;
+            max-width: min(630px, 90vw);
             margin: 0 auto;
 
             #inputs{    
@@ -194,6 +222,7 @@
         
             #formButtons {
                 padding: 30px 0;
+
                 button {
                     height: 50px;
                     width: 160px;
@@ -233,10 +262,8 @@
                     width: 10vw;
                     font-size: 25px;
                 }
-            }
-        
+            } 
             #formButtons {
-    
                 button {
                     i   {
                         vertical-align: top;
@@ -280,10 +307,9 @@
                     width: 10vw;
                     font-size: 20px;
                 }
-            }
-        
+            }  
+
             #formButtons {
-    
                 button {
                     i   {
                         vertical-align: top;
