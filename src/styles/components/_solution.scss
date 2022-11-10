@@ -1,0 +1,85 @@
+@use '../settings' as *;
+
+table {
+    @keyframes appear {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+    margin-top: 65px;
+    margin-bottom: auto;
+    flex-shrink: 0;
+    max-width: 480px;
+    color:white;
+    border-collapse: collapse;
+    animation: appear 1.5s ease;
+
+    td {
+        text-align: center;
+        width: 50px;
+        height: 50px;
+        border: 2px solid $light;
+        font-size: 30px;
+    }
+
+    .soluce_side_color {
+        background-color: $normal;
+    }
+}
+
+@media (max-width: 950px) and (min-width: 781px) {    
+    table {
+        max-width: 90vw;
+        max-height: 90vw;
+        margin: 0 auto;
+
+        td {
+            max-width: 70px;
+            height: 66px;
+            width: 9vw;
+            font-size: 50px;
+        }
+    } 
+}
+
+@media (max-width: 780px) and (min-width: 481px) {    
+    table {
+        max-width: 630px;
+        max-height: 630px;
+        margin: 0 auto;
+
+        td {
+            max-width: 70px;
+            height: min(10vw, 66px);
+            width: 10vw;
+            font-size: 45px;
+        }
+    }
+}
+
+@media (max-width: 480px) and (min-width:351px) {
+    table {
+        max-width: 90vw;
+        margin: 0 auto;
+        table-layout: fixed;
+
+        td {
+            height: 10vw;
+            width: 10vw;
+            font-size: 25px;
+        }
+    } 
+}
+
+
+@media (max-width: 350px) {
+    table {
+        max-width: 90vw;
+        margin: 0 auto;
+
+        td {
+            height: 10vw;
+            width: 10vw;
+            font-size: 20px;
+        }
+    }
+}

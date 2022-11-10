@@ -1,6 +1,6 @@
 import React from 'react';
 
-const difficulties = [20, 31, 43, 47, 51, 57]
+const difficulties = [22, 33, 45, 49, 54, 61]
 
 const Creation = (props) => {
 
