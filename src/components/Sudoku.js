@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import { isWrong, solving, createNewSudoku } from '../functions/SudokuFunctions.js';
 import Creation from './Creation.js';
 
@@ -15,6 +15,11 @@ const Sudoku = () => {
         setCreatedSudoku([[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0]]);
         setSolution([]);
         setWrongInput(-1);
+    }
+
+    function setCheck(value) {
+        setCheckIsTrue(value);
+        setTimeout(() => setCheckIsTrue(0), 2000);
     }
 
     function handleSubmitAndSolve(e) {
@@ -52,8 +57,7 @@ const Sudoku = () => {
         }
     }
 
-    function handleCreation() {
-        const difficulty = 55;
+    function handleCreation(difficulty) {
         let board = createNewSudoku(difficulty);
         setSudokuValues(board);
         setCreatedSudoku(board);
@@ -68,19 +72,16 @@ const Sudoku = () => {
 
             if (soluce) { 
                 console.log("The Sudoku is Correct !");
-                setCheckIsTrue(1);
-                setTimeout(() => setCheckIsTrue(0), 2000);
+                setCheck(1);
              }
             else { 
                 console.log('The Sudoku cannot be solve, need some changes !');
-                setCheckIsTrue(-1);
-                setTimeout(() => setCheckIsTrue(0), 2000);
+                setCheck(-1)
             }
         }
         else {
             setWrongInput(wrongSlot)
-            setCheckIsTrue(-1);
-            setTimeout(() => setCheckIsTrue(0), 2000);
+            setCheck(-1)
         }
     }
 
@@ -124,16 +125,16 @@ const Sudoku = () => {
     return (
         <div>
             <div id ="sudoku">
+                
                 <form id='sudokuForm' onSubmit={handleSubmitAndSolve}>
+                    <Creation creationFunction={handleCreation} />
                     <div id='inputs' className={checkIsTrue !== 0 ? (checkIsTrue === 1 ? 'checkIsTrue' : 'checkIsFalse') : ''} >
                         {render_inputs()}
                     </div>
                     <div id="formButtons">
-                        <Creation creationFunction={handleCreation} />
-                        {/*<button id='createButton' type='button' onClick={handleCreation}>CREATE <i className="fa-solid fa-table-cells"></i></button>*/}
                         <button id='submitButton' type='submit'>SOLVE <i className="fa-solid fa-robot"></i></button>
                         <button id='resetButton' type='button' onClick={handleReset}>RESET <i className="fa-solid fa-arrows-rotate"></i></button>
-                        <button id='checkButton' type='button' onClick={handleChecking}>CHECK <i className="fa-solid fa-arrows-rotate"></i></button>  
+                        <button id='checkButton' type='button' onClick={handleChecking}>CHECK <i className="fa-regular fa-circle-check"></i></button>  
                         <button id='clearButton' type='reset' onClick={resetAll}>CLEAR <i className="fa-solid fa-trash-can"></i></button> 
                     </div>
                 </form>
