@@ -1,6 +1,7 @@
 @use '../settings' as *;
 
 #sudoku {
+    height: 100vh;
     text-align: center;
     display: flex;
     justify-content: space-around;
@@ -34,6 +35,10 @@
             .red_input {
                 background-color: red;
             }
+
+            .correct {
+                color: rgb(37, 206, 37);
+            }
     
             .sudokuSlot::-webkit-outer-spin-button, .sudokuSlot::-webkit-inner-spin-button {
                 -webkit-appearance: none;
@@ -47,10 +52,8 @@
 
             @keyframes checkTrueShadow {
                 0% {box-shadow: none}
-                //35% {box-shadow: 0px 0px 20px 10px lightgreen;}
                 30% {box-shadow: 0px 0px 20px 15px rgb(57, 231, 57);}
                 60% {box-shadow: 0px 0px 20px 15px rgb(57, 231, 57);}
-                //65% {box-shadow: 0px 0px 20px 10px lightgreen;}
                 100% {box-shadow: none}
             }
         }
@@ -68,13 +71,16 @@
             }
         }
 
-        //Prevent changing color on disabled slots
         .inputs_side_color {
             background-color: $maxlight;
         }
 
         .inputs_normal_color {
             background-color: white;
+        }
+
+        .sudokuDone {
+            box-shadow: 0px 0px 20px 15px rgb(57, 231, 57);
         }
     
         #formButtons {
@@ -124,39 +130,31 @@
                 color: white;
                 background-color: rgb(203, 20, 20);
             }
-        }      
+        } 
+        #wrongContainer {
+            position:relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            #wrongSudoku {
+                max-width: 80%;
+                padding: 5px 5px;
+                background-image: linear-gradient(45deg, rgb(206, 35, 35),rgb(236, 15, 15));
+                box-shadow: 2px 3px #770e0e;
+                position:absolute;
+                bottom: 150px;
+                border-radius: 20px;
+                font-size: 15px;
+                color:white;
+            }
+        }     
     }   
-    
-    table {
-        @keyframes appear {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-        margin-top: 65px;
-        flex-shrink: 0;
-        max-width: 480px;
-        color:white;
-        height: 100%;
-        border-collapse: collapse;
-        animation: appear 1.5s ease;
-
-        td {
-            text-align: center;
-            width: 50px;
-            height: 50px;
-            border: 2px solid $light;
-            font-size: 30px;
-        }
-
-        .soluce_side_color {
-            background-color: $normal;
-        }
-    }
 }
 
 
 @media (max-width: 950px) and (min-width: 781px) {
     #sudoku {
+        height: auto;
         flex-direction: column;
         gap:70px;
 
@@ -184,18 +182,12 @@
                     font-size: 25px;
                 }
             }
-        }
-    
-        table {
-            max-width: 90vw;
-            max-height: 90vw;
-            margin: 0 auto;
-    
-            td {
-                max-width: 70px;
-                height: 66px;
-                width: 9vw;
-                font-size: 50px;
+
+            #wrongContainer {
+                #wrongSudoku {
+                    bottom: 250px;
+                    font-size: 15px;
+                }
             }
         }
     }
@@ -203,6 +195,7 @@
 
 @media (max-width: 780px) and (min-width: 481px) {
     #sudoku {
+        height: auto;
         flex-direction: column;
         gap:40px;
     
@@ -230,18 +223,12 @@
                     font-size: 25px;
                 }
             }
-        }
-    
-        table {
-            max-width: 630px;
-            max-height: 630px;
-            margin: 0 auto;
-    
-            td {
-                max-width: 70px;
-                height: min(10vw, 66px);
-                width: 10vw;
-                font-size: 45px;
+
+            #wrongContainer {
+                #wrongSudoku {
+                    bottom: 250px;
+                    font-size: 15px;
+                }
             }
         }
     }
@@ -249,6 +236,7 @@
 
 @media (max-width: 480px) and (min-width:351px) {
     #sudoku {
+        height: auto;
         flex-direction: column;
         gap:40px;
     
@@ -276,24 +264,13 @@
                 }
             }
         }
-    
-        table {
-            max-width: 90vw;
-            margin: 0 auto;
-            table-layout: fixed;
-    
-            td {
-                height: 10vw;
-                width: 10vw;
-                font-size: 25px;
-            }
-        }
     }
 }
 
 
 @media (max-width: 350px) {
     #sudoku {
+        height: auto;
         flex-direction: column;
         gap:60px;
     
@@ -320,17 +297,6 @@
                     border-radius: 12px;                 
                     font-size: 15px;
                 }
-            }
-        }
-    
-        table {
-            max-width: 90vw;
-            margin: 0 auto;
-    
-            td {
-                height: 10vw;
-                width: 10vw;
-                font-size: 20px;
             }
         }
     }
