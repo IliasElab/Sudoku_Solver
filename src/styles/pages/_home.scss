@@ -65,9 +65,7 @@
             }
         }
 
-        .scrolled {
-            visibility: hidden;
-        }
+        .scrolled { visibility: hidden; }
     }
 
     #main {
@@ -131,9 +129,7 @@
 @media (max-width: 1440px) and (min-width: 951px) {
     #home {    
         #intro {           
-            h1 {
-                font-size: 65px;
-            }
+            h1 { font-size: 65px; }
     
             h3 {
                 font-size: 40px;
@@ -151,18 +147,14 @@
             }
         }
     
-        #about {      
-            padding-top: 100px;  
-        }
+        #about { padding-top: 100px; }
     }
 }
 
 @media (max-width: 950px) and (min-width: 781px) {
     #home {    
         #intro {    
-            img {
-                object-position: 40% 0;
-            }
+            img { object-position: 40% 0; }
         
             h1 {
                 font-size: 65px;
@@ -187,16 +179,9 @@
     
         #about {    
             padding-top: 100px;
-            h2 {
-                font-size: 30px;
-            }
-            h3 {
-                font-size: 28px;
-            }
-    
-            #list_contact {
-                max-width: 80%;
-            }
+            h2 { font-size: 30px; }
+            h3 { font-size: 28px; }
+            #list_contact { max-width: 80%; }
         }
     }
 }
@@ -205,9 +190,7 @@
     #home {    
         #intro {   
             gap: 50px; 
-            img {
-                object-position: 35% 0;
-            }
+            img { object-position: 35% 0; }
         
             h1 {
                 padding-top: 100px;
@@ -233,12 +216,8 @@
     
         #about {    
             padding-top: 100px;
-            h2 {
-                font-size: 28px;
-            }
-            h3 {
-                font-size: 25px;
-            }
+            h2 { font-size: 28px; }
+            h3 { font-size: 25px; }
         }
     }
 }
@@ -248,9 +227,7 @@
         width: 100vw;
         #intro {
             gap: 60px; 
-            img {
-                object-position: 35% 0;
-            }
+            img { object-position: 35% 0; }
 
             h1 {
                 padding-bottom: 0;
@@ -275,13 +252,9 @@
 
         #about {
             padding-top: 75px;
-            h2 {
-                font-size: 25px;
-            }
+            h2 { font-size: 25px; }
 
-            h3 {
-                font-size: 22px;
-            }
+            h3 { font-size: 22px; }
         }
     }
 }
@@ -291,9 +264,7 @@
         width: 100vw;
         #intro {
             gap: 40px; 
-            img {
-                object-position: 30% 0;
-            }
+            img { object-position: 30% 0; }
 
             h1 {
                 padding-bottom:0;
@@ -318,13 +289,9 @@
 
         #about {
             padding-top: 50px;
-            h2 {
-                font-size: 20px;
-            }
+            h2 { font-size: 20px; }
 
-            h3 {
-                font-size: 17px;
-            }
+            h3 { font-size: 17px; }
         }
     }
 }
